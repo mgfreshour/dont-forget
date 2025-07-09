@@ -1,0 +1,45 @@
+{
+  "name": "dont-forget",
+  "version": "0.0.1",
+  "description": "dont-forget MCP server",
+  "type": "module",
+  "bin": {
+    "dont-forget": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && cp -r src/web/static dist/web/ && mcp-build",
+    "watch": "tsc --watch",
+    "start": "node dist/index.js",
+    "test": "tsc && ./run-tests.sh",
+    "test:integration": "tsc && node dist/test/integration.js",
+    "test:cursor": "tsc && node dist/test/cursor-test.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.15.0",
+    "@xenova/transformers": "^2.17.2",
+    "body-parser": "^1.20.2",
+    "commander": "^12.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mcp-framework": "^0.2.2",
+    "node-fetch": "^3.3.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
+    "vectordb": "^0.21.0",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.24",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.19.0"
+  }
+}

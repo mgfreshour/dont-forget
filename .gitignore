@@ -1,0 +1,13 @@
+node_modules
+dist
+.env
+logs
+.DS_Store
+.idea
+.vscode
+data
+.cursor
+test-data
+GEMINI.md
+.cursorrules
+coverage/
