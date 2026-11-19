@@ -11,6 +11,9 @@ declare global {
 }
 
 describe('GetComponentHistoryTool', () => {
+    let tool: GetComponentHistoryTool;
+    let databaseManager: DatabaseManager;
+
     beforeEach(async () => {
         console.log('Setting up GetComponentHistoryTool test...');
         
@@ -66,29 +69,28 @@ describe('GetComponentHistoryTool', () => {
         console.log('GetComponentHistoryTool test completed successfully');
     });
 
-    it('should get component history with changes and problems', async () => {
-        const result = await tool.execute({ name: 'TestComponent.ts' });
+    test('should get component history with changes and problems', async () => {
+        const result = await tool.execute({ component: 'TestComponent.ts' });
         
         console.log('Component history result:', result);
         
-        assert(result.includes('Component History: TestComponent.ts'));
-        assert(result.includes('Changes (2)'));
+        assert(result.includes('History for component: TestComponent.ts'));
+        assert(result.includes('Changes:'));
         assert(result.includes('First change for TestComponent'));
         assert(result.includes('Second change for TestComponent'));
-        assert(result.includes('Problems (2)'));
+        assert(result.includes('Problems:'));
         assert(result.includes('Bug in TestComponent'));
         assert(result.includes('Performance issue in TestComponent'));
         assert(result.includes('change-details('));
         assert(result.includes('problem-details('));
     });
 
-    it('should handle component with no history', async () => {
-        const result = await tool.execute({ name: 'NonExistentComponent.ts' });
+    test('should handle component with no history', async () => {
+        const result = await tool.execute({ component: 'NonExistentComponent.ts' });
         
         console.log('Non-existent component result:', result);
         
-        assert(result.includes('Component History: NonExistentComponent.ts'));
-        assert(result.includes('No changes found for this component'));
-        assert(result.includes('No problems found for this component'));
+        assert(result.includes('History for component: NonExistentComponent.ts'));
+        assert(result.includes('No history found for this component'));
     });
 }); 

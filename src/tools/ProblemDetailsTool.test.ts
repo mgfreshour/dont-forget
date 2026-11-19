@@ -11,6 +11,10 @@ declare global {
 }
 
 describe('ProblemDetailsTool', () => {
+    let tool: ProblemDetailsTool;
+    let testProblemId: number;
+    let databaseManager: DatabaseManager;
+
     beforeEach(async () => {
         console.log('Setting up ProblemDetailsTool test...');
         
@@ -49,14 +53,14 @@ describe('ProblemDetailsTool', () => {
         console.log(`Test problem stored with ID: ${testProblemId}`);
     });
 
-    after(async () => {
+    afterEach(async () => {
         if (databaseManager) {
             await databaseManager.close();
         }
         console.log('ProblemDetailsTool test completed successfully');
     });
 
-    it('should get problem details', async () => {
+    test('should get problem details', async () => {
         const result = await tool.execute({ id: testProblemId });
         
         console.log(`Tool result for ID ${testProblemId}:`, result);
@@ -70,10 +74,10 @@ describe('ProblemDetailsTool', () => {
         console.log('ProblemDetailsTool result:', result);
     });
 
-    it('should handle non-existent problem ID', async () => {
+    test('should handle non-existent problem ID', async () => {
         const result = await tool.execute({ id: 99999 });
         
-        assert(result.includes('Problem with ID 99999 not found'));
+        assert(result.includes('Problem with ID "99999" not found'));
         
         console.log('Non-existent problem result:', result);
     });

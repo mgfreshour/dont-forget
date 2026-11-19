@@ -11,6 +11,10 @@ declare global {
 }
 
 describe('ChangeDetailsTool', () => {
+    let tool: ChangeDetailsTool;
+    let testChangeId: number;
+    let databaseManager: DatabaseManager;
+
     beforeEach(async () => {
         console.log('Setting up ChangeDetailsTool test...');
         
@@ -49,14 +53,14 @@ describe('ChangeDetailsTool', () => {
         console.log(`Test change stored with ID: ${testChangeId}`);
     });
 
-    after(async () => {
+    afterEach(async () => {
         if (databaseManager) {
             await databaseManager.close();
         }
         console.log('ChangeDetailsTool test completed successfully');
     });
 
-    it('should get change details', async () => {
+    test('should get change details', async () => {
         const result = await tool.execute({ id: testChangeId });
         
         console.log(`Tool result for ID ${testChangeId}:`, result);
@@ -70,10 +74,10 @@ describe('ChangeDetailsTool', () => {
         console.log('ChangeDetailsTool result:', result);
     });
 
-    it('should handle non-existent change ID', async () => {
+    test('should handle non-existent change ID', async () => {
         const result = await tool.execute({ id: 99999 });
         
-        assert(result.includes('Change with ID 99999 not found'));
+        assert(result.includes('Change with ID "99999" not found'));
         
         console.log('Non-existent change result:', result);
     });
