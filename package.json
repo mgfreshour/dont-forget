@@ -1,7 +1,27 @@
 {
   "name": "dont-forget",
   "version": "0.0.1",
-  "description": "dont-forget MCP server",
+  "description": "MCP server that gives coding agents persistent memory for mistakes, changes, and context",
+  "license": "MIT",
+  "author": "M Freshour",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgfreshour/dont-forget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mgfreshour/dont-forget/issues"
+  },
+  "homepage": "https://github.com/mgfreshour/dont-forget#readme",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "agent",
+    "memory",
+    "cursor",
+    "sqlite",
+    "embeddings"
+  ],
   "type": "module",
   "bin": {
     "dont-forget": "./dist/index.js"

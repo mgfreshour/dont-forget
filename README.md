@@ -37,24 +37,32 @@ The Dont-Forget MCP server helps AI agents:
 - Node.js 18.19.0 or higher
 - npm or yarn package manager
 
-### Install
+### Install from source
 
 ```bash
-npm install -g dont-forget
+git clone https://github.com/mgfreshour/dont-forget.git
+cd dont-forget
+npm install
+npm run build
 ```
 
-### Start Server
+### Start server
 
 ```bash
-# Basic MCP server
-dont-forget
+# Basic MCP server (from project root after build)
+node dist/index.js
 
-# With web debugging interface  
-dont-forget --debug-server
+# Or use the package binary after build
+npx dont-forget
+
+# With web debugging interface (localhost only — no auth)
+npx dont-forget --debug-server
 
 # Custom configuration
-dont-forget --debug-server --web-port 3001 --data-dir ./my-data
+npx dont-forget --debug-server --web-port 3001 --data-dir ./my-data
 ```
+
+When the package is published to npm, you can also run `npm install -g dont-forget`.
 
 ### Command Line Options
 
@@ -74,18 +82,32 @@ Add to your MCP client configuration:
 {
   "mcpServers": {
     "dont-forget": {
-      "command": "dont-forget",
-      "args": ["--debug-server"]
+      "command": "node",
+      "args": ["/absolute/path/to/dont-forget/dist/index.js", "--debug-server"]
     }
   }
 }
 ```
+
+Use the path to your clone (or `dont-forget` on your `PATH` if installed globally).
 
 ### Environment Variables
 
 ```bash
 export DONT_FORGET_DATA_DIR="/path/to/data"  # Override data directory
 ```
+
+Copy `.env.example` to `.env` if you use a local env file (not required for the server).
+
+### Development
+
+```bash
+npm run build
+npm test
+npm run test:integration   # optional
+```
+
+Local databases and logs are written under `data/` (gitignored). Do not commit that directory.
 
 ## 📝 Agent Rules by Language
 
@@ -383,21 +405,17 @@ This helps you:
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Update documentation
-5. Submit a pull request
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## 📄 License
 
-MIT License - see LICENSE file for details.
+[MIT](./LICENSE)
 
 ## 🆘 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-org/dont-forget/issues)
-- **Documentation**: This README and `/docs` folder
-- **Debug Interface**: Use `--debug-server` for interactive debugging
+- **Issues**: [GitHub Issues](https://github.com/mgfreshour/dont-forget/issues)
+- **Documentation**: This README
+- **Debug interface**: Use `--debug-server` on localhost for interactive debugging
 
 ---
 
